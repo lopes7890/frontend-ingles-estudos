@@ -29,18 +29,19 @@ function hideLoading(){
 }
 
 const generate = async () => {
-
     const displayGenerate = document.getElementById("wordGenerate");
-    const displayResponse = document.getElementById("response")
-    const displayResponseUser = document.getElementById("responseUser")
+    const displayResponse = document.getElementById("response");
+    const displayResponseUser = document.getElementById("responseUser");
     const url = "https://api-ingles-estudos.onrender.com/generate";
 
     try {
-        displayGenerate.innerText = ""
-        displayResponse.innerText = ""
-        displayResponseUser.value = ""
+        // Limpa os campos
+        displayGenerate.innerText = "";
+        displayResponse.innerText = "";
+        displayResponseUser.value = "";
 
-        showLoading()
+        showLoading();
+
         // Faz a requisição e aguarda a resposta
         const response = await fetch(url);
 
@@ -52,22 +53,23 @@ const generate = async () => {
         // Converte a resposta para JSON
         const data = await response.json();
 
-        generatedTranslate = data.Translate
-        generatedWord = data.Word
+        // Atualiza as variáveis globais
+        generatedTranslate = data.Translate || null;
+        generatedWord = data.Word || null;
 
-        if (data.message){
-            displayGenerate.innerText = "Tente novamente"
+        // Exibe os dados na tela
+        if (data.message) {
+            displayGenerate.innerText = "Tente novamente";
+        } else {
+            displayGenerate.innerText = generatedTranslate || "Palavra não encontrada";
         }
 
-        // Exibe os dados no console e na tela
         console.log("Dados recebidos:", data);
-
-        hideLoading()
-        
-        displayGenerate.innerText = generatedTranslate || "Palavra não encontrada"; // Supondo que a resposta tenha uma propriedade 'word'
     } catch (error) {
         console.error("Erro:", error);
         displayGenerate.innerText = "Erro ao gerar palavra";
-        hideLoading()
+    } finally {
+        // Sempre esconde o loading, mesmo em caso de erro
+        hideLoading();
     }
 };
