@@ -28,6 +28,7 @@ function hideLoading(){
     }
 }
 
+
 const generate = async () => {
     const displayGenerate = document.getElementById("wordGenerate");
     const displayResponse = document.getElementById("response");
@@ -36,7 +37,7 @@ const generate = async () => {
 
     try {
         // Limpa os campos para evitar mostrar dados antigos
-        displayGenerate.innerText = "Carregando...";
+        displayGenerate.innerText = "";
         displayResponse.innerText = "";
         displayResponseUser.value = "";
 
