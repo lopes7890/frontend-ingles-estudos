@@ -35,41 +35,41 @@ const generate = async () => {
     const url = "https://api-ingles-estudos.onrender.com/generate";
 
     try {
-        // Limpa os campos
-        displayGenerate.innerText = "";
+        // Limpa os campos para evitar mostrar dados antigos
+        displayGenerate.innerText = "Carregando...";
         displayResponse.innerText = "";
         displayResponseUser.value = "";
 
         showLoading();
 
-        // Faz a requisição e aguarda a resposta
+        // Faz a requisição à API
         const response = await fetch(url);
 
-        // Verifica se a resposta é válida
+        // Verifica se a resposta é válida (status 200-299)
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // Converte a resposta para JSON
+        // Converte os dados retornados para JSON
         const data = await response.json();
 
-        // Atualiza as variáveis globais
-        generatedTranslate = data.Translate || null;
-        generatedWord = data.Word || null;
+        // Exibe os dados recebidos ou uma mensagem
+        if (data.Translate && data.Word) {
+            generatedTranslate = data.Translate;
+            generatedWord = data.Word;
 
-        // Exibe os dados na tela
-        if (data.message) {
+            displayGenerate.innerText = generatedTranslate;
+            console.log("Dados recebidos:", data);
+        } else if (data.message) {
             displayGenerate.innerText = "Tente novamente";
         } else {
-            displayGenerate.innerText = generatedTranslate || "Palavra não encontrada";
+            displayGenerate.innerText = "Palavra não encontrada";
         }
-
-        console.log("Dados recebidos:", data);
     } catch (error) {
-        console.error("Erro:", error);
+        console.error("Erro ao processar:", error);
         displayGenerate.innerText = "Erro ao gerar palavra";
     } finally {
-        // Sempre esconde o loading, mesmo em caso de erro
+        // Sempre esconde o indicador de carregamento
         hideLoading();
     }
 };
