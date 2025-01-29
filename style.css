@@ -8,6 +8,25 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    font-size: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.fixed-button a {
+    color: white;
+    text-decoration: none;
+}
+
+
 button {
     height: 70px;
     width: 300px;

@@ -55,7 +55,7 @@ const generate = async () => {
         if (data.Translate && data.Word) {
             generatedTranslate = data.Translate;
             generatedWord = data.Word;
-
+                                                            // generatedeWord
             if (displayGenerate) displayGenerate.innerText = generatedTranslate;
             console.log("Dados recebidos:", data);
         } else {

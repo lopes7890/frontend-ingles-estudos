@@ -43,7 +43,7 @@ const verify = async () => {
     showLoading()
     const url = "https://api-ingles-estudos.onrender.com/verify";
     try {
-
+                                // generatedTranslate
         const payload = { word: generatedWord, responseUser: user};
         // Faz a requisição e aguarda a resposta
         const response = await fetch(url, {
