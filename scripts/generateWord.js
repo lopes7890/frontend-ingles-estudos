@@ -36,22 +36,20 @@ const generate = async () => {
     const url = "https://api-ingles-estudos.onrender.com/generate";
 
     try {
-        // Limpa os campos para evitar mostrar dados antigos
+        
         displayGenerate.innerText = "";
         displayResponse.innerText = "";
         displayResponseUser.value = "";
 
         showLoading();
 
-        // Faz a requisição à API
+        
         const response = await fetch(url);
 
-        // Verifica se a resposta é válida (status 200-299)
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // Converte os dados retornados para JSON
         const data = await response.json();
 
         // Exibe os dados recebidos ou uma mensagem
@@ -70,7 +68,6 @@ const generate = async () => {
         console.error("Erro ao processar:", error);
         displayGenerate.innerText = "Erro ao gerar palavra";
     } finally {
-        // Sempre esconde o indicador de carregamento
         hideLoading();
     }
 };
